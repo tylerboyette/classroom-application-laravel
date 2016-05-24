@@ -48,10 +48,14 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        /**
+         * The email will check for a valid NJIT address (ending with "@njit.edu")
+         * 
+         */
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users|regex:/^[a-z]+\d*@njit\.edu$/',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -65,16 +69,15 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         $role = 'teacher';
-        $regex_njit = '/^[a-z]+\d*@njit.edu$/';
-        $regex_student = '/^[a-z]{2,4}+\d{1,4}@njit.edu$/';
+        $regex_student = '/^[a-z]{2,4}+\d{1,4}@njit\.edu$/';
 
-        // Check email to see whether it's an instructor or student
-        if (preg_match($regex_njit, $data['email'])) {
-            if (preg_match($regex_student, $data['email'])) {
-                $role = 'student';
-            }
-        } else {
-            abort(403, 'Unauthorized action. Please try again.');
+        /**
+         * Assign the appropriate role based on the regular expression
+         * for a students' email
+         * 
+         */
+        if (preg_match($regex_student, $data['email'])) {
+            $role = 'student';
         }
 
         return User::create([
