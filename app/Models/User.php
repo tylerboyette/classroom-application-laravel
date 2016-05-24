@@ -23,4 +23,39 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Capitalize the first character of the first name attribute
+     * to keep consistency
+     * 
+     * @param string $value 
+     * @return string
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+
+    /**
+     * Capitalize the first character of the last name attribute
+     * to keep consistency
+     * 
+     * @param string $value 
+     * @return string
+     */
+    public function setLastNameAttribute($value) 
+    {
+        $this->attributes['last_name'] = ucfirst($value);
+    }
+
+    /**
+     * Make the email address all lowercase to keep consistency
+     * 
+     * @param string $value 
+     * @return string
+     */
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
 }
