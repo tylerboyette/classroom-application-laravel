@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -49,7 +49,8 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -63,8 +64,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $role = 'teacher';
+        $regex_njit = '/^[a-z]+\d*@njit.edu$/';
+        $regex_student = '/^[a-z]{2,4}+\d{1,4}@njit.edu$/';
+
+        // Check email to see whether it's an instructor or student
+        if (preg_match($regex_njit, $data['email'])) {
+            if (preg_match($regex_student, $data['email'])) {
+                $role = 'student';
+            }
+        } else {
+            abort(403, 'Unauthorized action. Please try again.');
+        }
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'role' => $role,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
