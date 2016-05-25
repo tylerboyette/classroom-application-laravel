@@ -28,3 +28,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+/**
+ * User Routes
+ */
+Route::get('/profile', 'UserController@show');
+Route::post('/profile/update', 'UserController@update');
