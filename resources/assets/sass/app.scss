@@ -1,8 +1,14 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* Used for styling link elements in the navigation */
 .white {
   color: white;
 }
 
-.padding-none {
-  padding: 0;
+.white:hover {
+  color: white;
+}
+
+.pleft-15 {
+  padding-left: 15px;
 }
