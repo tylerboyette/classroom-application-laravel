@@ -11,10 +11,20 @@
 |
 */
 
+/**
+ * If the user is not logged in, display a login form,
+ * otherwise, show the home page
+ * 
+ */
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::guest()) {
+      return view('auth.login');
+    } else {
+      return view('pages.home');
+    }
 });
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
