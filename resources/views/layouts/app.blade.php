@@ -17,7 +17,15 @@
     @include('layouts.navigation')
 
     <div class="container">
-      @yield('content')
+      <div class="row">
+        <div class="col-xs-12 col-md-4">
+          @include('layouts.side-content')
+        </div>
+
+        <div class="col-xs-12 col-md-8">
+          @yield('content')
+        </div>
+      </div>
     </div>
 
     <!-- JavaScript -->
