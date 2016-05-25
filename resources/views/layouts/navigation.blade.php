@@ -10,13 +10,23 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="{{ url('/') }}">Classroom</a>
+      <a class="navbar-brand" href="{{ url('/') }}"><span class="white">Classroom</span></a>
     </div>
 
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
       <!-- Left side of navbar -->
       <ul class="nav navbar-nav">
-        <li><a href="{{ url('/home') }}">Home</a></li>
+        @if (Auth::user())
+          <!-- Display appropriate links based on the user's role -->
+          @if (Auth::user()->role == 'teacher')
+            <li><a href="{{ url('/class/add') }}">Add Class</a></li>
+          @else 
+            <li><a href="{{ url('/classes/view') }}">Classes</a></li>
+          @endif
+          
+          <li><a href="{{ url('/profile') }}">Profile</a></li>
+          <li><a href="{{ url('/messages') }}">Messages</a></li>
+        @endif
       </ul>
 
       <!-- Right side of navbar -->
@@ -27,14 +37,12 @@
           <li><a href="{{ url('/register') }}">Register</a>
         @else
           <li>
-            <p class="navbar-text">Signed in as 
-              <a href="{{ url('/profile') }}" class="white">
-                <strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
-              </a>
+            <p class="navbar-text pleft-15">Signed in as 
+              <a href="{{ url('/profile') }}" class="white">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>.
             </p>
           </li>
           <li>
-            <a href="#" class="padding-none" style="padding:0;"><button type="button" class="btn btn-default navbar-btn">Logout</button></a>
+            <a href="{{ url('/logout') }}" style="padding: 0; padding-left: 15px;"><button type="button" class="btn btn-default navbar-btn">Logout</button></a>
           </li>
         @endif
       </ul>
