@@ -17,15 +17,24 @@
     @include('layouts.navigation')
 
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-md-4">
-          @include('layouts.side-content')
+      @if (Auth::user())
+        <div class="page-header" style="margin: -10px 0px 20px 0px;">
+          <h2 class="text-right">@yield('page-header')</h2>
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-4">
+            @include('layouts.side-content')
+          </div>
 
-        <div class="col-xs-12 col-md-8">
+          <div class="col-xs-12 col-md-8">
+            @yield('content')
+          </div>
+        </div>
+      @else
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
           @yield('content')
         </div>
-      </div>
+      @endif
     </div>
 
     <!-- JavaScript -->
