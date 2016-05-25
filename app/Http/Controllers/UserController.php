@@ -28,4 +28,19 @@ class UserController extends Controller
     {
         return view('pages.user.profile');
     }
+
+    /**
+     * Updates the user's profile
+     * 
+     * @return Response
+     */
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->save();
+
+        return view('pages.user.profile');
+    }
 }
