@@ -19,7 +19,7 @@
         <div class="col-md-10">
           <div class="collapse" id="edit-collapse">
             <div class="well">
-              <form class="form-horizontal" role="form" method="POST" action="{{ url('/profile/edit') }}">
+              <form class="form-horizontal" role="form" method="POST" action="{{ url('/profile/update') }}">
                 {{ csrf_field() }}
 
                 <!-- First Name -->
@@ -60,11 +60,7 @@
         <div class="col-md-2">
           <a class="btn btn-primary" role="button" data-toggle="collapse" href="#edit-collapse" aria-expanded="false" aria-controls="edit-collapse">Edit Profile</a>
         </div>
-        
       </div>
-
-
-
     </div>
   </div>
 @endsection
