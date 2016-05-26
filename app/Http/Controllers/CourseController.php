@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class ClassController extends Controller
+use Illuminate\Support\Facades\Auth;
+use App\Models\Course;
+
+class CourseController extends Controller
 {
     /**
      * Specify the middleware for this controller
@@ -28,24 +31,41 @@ class ClassController extends Controller
     }
 
     /**
-     * Show a form to create a new class
+     * Show a form to create a new class - GET
      * 
      * @return Response 
      */
     public function create()
     {
-        // /class/create - show form that creates a new class [GET]
-        return view('pages.class.create');
+        return view('pages.course.create');
     }
 
     /**
-     * Save a newly created class 
+     * Save a newly created class - POST
      * 
      * @return Response 
      */
-    public function store()
+    public function store(Request $request)
     {
-        // /class - save a newly created class [POST]
+        $this->validate($request, [
+            'subject' => 'required|string|max:5', // CS
+            'title' => 'required|string|max:255',   // Roadmap To Computing
+            'course' => 'required|numeric|digits_between:2,4', // 100
+            'section' => 'required|numeric|digits_between:2,4' // 001
+        ]);
+
+        $user_id = Auth::user()->id;
+
+        $course = new Course;
+        $course->subject = $request->input('subject');
+        $course->title = $request->input('title');
+        $course->course = $request->input('course');
+        $course->section = $request->input('section');
+        $course->user_id = $user_id;
+
+        if ($course->save()) {
+            return redirect('/course/create')->with('status', 'Course added successfully!');
+        }
     }
 
     /**
