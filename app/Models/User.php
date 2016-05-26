@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         $this->attributes['email'] = strtolower($value);
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany('App\Models\Course');
+    }
 }
