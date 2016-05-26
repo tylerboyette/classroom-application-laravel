@@ -33,3 +33,10 @@ Route::get('/home', 'HomeController@index');
  */
 Route::get('/profile', 'UserController@show');
 Route::post('/profile/update', 'UserController@update');
+
+/**
+ * Courses Routes
+ */
+Route::get('/course/create', 'CourseController@create');
+Route::post('/course', 'CourseController@store');
+
