@@ -18,7 +18,7 @@
           <div class="form-group{{ $errors->has('subject') ? ' has-error': '' }}">
             <label class="col-md-3 control-label">Subject</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" name="subject" value={{ old('subject') }}>
+              <input type="text" class="form-control" name="subject" value="{{ old('subject') }}"" placeholder="CS">
 
               @if ($errors->has('subject'))
                 <span class="help-block"><strong>{{ $errors->first('subject') }}</strong></span>
@@ -30,7 +30,7 @@
           <div class="form-group{{ $errors->has('title') ? ' has-error': '' }}">
             <label class="col-md-3 control-label">Title</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" name="title" value={{ old('title') }}>
+              <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Roadmap To Computing">
 
               @if ($errors->has('title'))
                 <span class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
@@ -42,7 +42,7 @@
           <div class="form-group{{ $errors->has('course') ? ' has-error': '' }}">
             <label class="col-md-3 control-label">Course Number</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" name="course" value={{ old('course') }}>
+              <input type="text" class="form-control" name="course" value="{{ old('course') }}" placeholder="100">
 
               @if ($errors->has('course'))
                 <span class="help-block"><strong>{{ $errors->first('course') }}</strong></span>
@@ -54,7 +54,7 @@
           <div class="form-group{{ $errors->has('section') ? ' has-error': '' }}">
             <label class="col-md-3 control-label">Section</label>
             <div class="col-md-6">
-              <input type="text" class="form-control" name="section" value={{ old('section') }}>
+              <input type="text" class="form-control" name="section" value="{{ old('section') }}"" placeholder="001">
 
               @if ($errors->has('section'))
                 <span class="help-block"><strong>{{ $errors->first('section') }}</strong></span>
