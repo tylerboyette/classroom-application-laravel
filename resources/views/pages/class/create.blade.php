@@ -11,7 +11,7 @@
     </div>
     <div class="panel-body">
       <div class="col-md-12">
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/class/create') }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/class') }}">
           {{ csrf_field() }}
 
           <!-- Subject -->
