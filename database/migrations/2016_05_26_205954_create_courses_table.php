@@ -12,7 +12,7 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::table('courses', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('subject');
@@ -29,7 +29,7 @@ class CreateCoursesTable extends Migration
         /**
          * Foreign Key Constraint
          */
-        Schema::table('classes', function (Blueprint $table) {
+        Schema::table('courses', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -41,8 +41,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::table('courses', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('courses');
     }
 }
