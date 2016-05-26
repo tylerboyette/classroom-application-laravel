@@ -36,11 +36,17 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Auth::user();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->save();
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255'
+        ]);
 
-        return view('pages.user.profile');
+        $user = Auth::user();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+
+        if ($user->save()) {
+            return redirect('/profile')->with('status', 'Profile updated successfully!');
+        }
     }
 }
