@@ -1,6 +1,10 @@
 <div class="well">
   <h4>Courses</h4>
-  <p>You are not currently taking any courses.</p>
+  @if (Auth::user()->role == 'teacher')
+    <p>Currently, you do not have any classes.</p>
+  @else
+    <p>You are not currently taking any courses.</p>
+  @endif
 </div>
 
 <div class="well">
