@@ -9,7 +9,7 @@
     <div class="panel-heading">Your profile's information, {{ Auth::user()->first_name }}</div>
     <div class="panel-body">
 
-      <!-- Display flashed session data on successfull or failed update -->
+      <!-- Display flashed session data on successful or failed update -->
       @if (session('status'))
         <div class="alert alert-success alert-dismissable" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</button>
