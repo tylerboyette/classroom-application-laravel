@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
+use App\Models\User;
+
+use DB;
 
 class CourseController extends Controller
 {
@@ -37,6 +40,11 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $user_id = Auth::user()->id;
+
+        $user = User::find($user_id);
+        //$user->courses;
+        //return User::find($user_id)->courses()->get();
         return view('pages.course.create');
     }
 
@@ -64,6 +72,9 @@ class CourseController extends Controller
         $course->user_id = $user_id;
 
         if ($course->save()) {
+            // Insert information into the pivot table for users and courses
+            $course->users()->attach($user_id);
+
             return redirect('/course/create')->with('status', 'Course added successfully!');
         }
     }
