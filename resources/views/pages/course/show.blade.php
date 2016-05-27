@@ -5,20 +5,16 @@
 @section('page-header', 'Course Details')
 
 @section('content')
+
+  <!-- Display flashed session data on successful action -->
+  @include('common.session-data')
+
   <div class="panel panel-info">
     <div class="panel-heading">
       Basic Course Information
     </div>
 
     <div class="panel-body">
-      <!-- Display flashed session data on successful action -->
-      @if (session('status'))
-        <div class="alert alert-success alert-dismissable" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          {{ session('status') }}
-        </div>
-      @endif
-
       <div class="col-xs-12 col-md-10">
         <h3>{{ $course->subject }} {{ $course->course }}-{{ $course->section }}</h3>
         <p><strong>Instructor:</strong> {{ $instructor->first_name }} {{ $instructor->last_name }}</p>
