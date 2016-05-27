@@ -81,16 +81,6 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form to edit a particular class
-     * 
-     * @return Response 
-     */
-    public function edit()
-    {
-        // /class/{id}/edit - show the form to edit the class [GET]
-    }
-
-    /**
      * Update the class' information [PUT]
      * 
      * @return Response
