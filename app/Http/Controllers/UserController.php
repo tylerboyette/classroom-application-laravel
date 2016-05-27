@@ -26,6 +26,7 @@ class UserController extends Controller
      */
     public function show() 
     {
+        //return Auth::user()->courses()->get();
         return view('pages.user.profile');
     }
 
