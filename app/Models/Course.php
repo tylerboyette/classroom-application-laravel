@@ -35,8 +35,7 @@ class Course extends Model
      */
     public function setTitleAttribute($value) 
     {
-        $lowercase = strtolower($value);
-        $this->attributes['title'] = ucfirst($lowercase);
+        $this->attributes['title'] = ucwords($value);
     }
 
     /**

@@ -57,7 +57,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'subject' => 'required|string|max:5', // CS
+            'subject' => 'required|alpha|max:5', // CS
             'title' => 'required|string|max:255',   // Roadmap To Computing
             'course' => 'required|numeric|digits_between:2,4', // 100
             'section' => 'required|numeric|digits_between:2,4' // 001
