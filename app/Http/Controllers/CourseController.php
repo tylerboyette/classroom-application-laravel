@@ -24,13 +24,19 @@ class CourseController extends Controller
     }
 
     /**
-     * Show details about a particular class 
+     * Show details about a particular class - GET
      * 
      * @return Response 
      */
-    public function show()
+    public function show($id)
     {
-        // /class/{id} - show details about the class [GET]
+        $course = Course::find($id);
+        $instructor = $course->users()->where('role', 'teacher')->first();
+
+        return view('pages.course.show', [
+            'course' => $course,
+            'instructor' => $instructor
+        ]);
     }
 
     /**
@@ -40,11 +46,6 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $user_id = Auth::user()->id;
-
-        $user = User::find($user_id);
-        //$user->courses;
-        //return User::find($user_id)->courses()->get();
         return view('pages.course.create');
     }
 
@@ -90,22 +91,39 @@ class CourseController extends Controller
     }
 
     /**
-     * Update the class' information
+     * Update the class' information [PUT]
      * 
      * @return Response
      */
-    public function update()
+    public function update(Course $course, Request $request, $id)
     {
-        // /class/{id} - update the class' information [PUT/PATCH]
+        $this->validate($request, [
+            'subject' => 'required|string|max:5',
+            'title' => 'required|string|max:255',
+            'course' => 'required|numeric|digits_between:2,4',
+            'section' => 'required|numeric|digits_between:2,4'
+        ]);
+
+        $course = Course::find($id);
+        $course->subject = $request->input('subject');
+        $course->title = $request->input('title');
+        $course->course = $request->input('course');
+        $course->section = $request->input('section');
+
+        if ($course->save()) {
+            return redirect('/course/' . $id)->with('status', 'Course updated successfully!');
+        }
     }
 
     /**
-     * Delete a particular class
+     * Delete a particular class - DELETE
      * 
      * @return Response 
      */
-    public function destroy()
+    public function destroy(Course $course, $id)
     {
-        // /class/{id} - delete the class [DELETE]
+        if (Course::destroy($id)) {
+            return redirect('/home')->with('status', 'Course deleted successfully!');
+        }
     }
 }
