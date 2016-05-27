@@ -1,9 +1,9 @@
 <div class="well">
   <h4>Courses</h4>
-  @if (Auth::user()->courses()->get())
+  @if (sizeof(Auth::user()->courses()->get()) > 0)
     <div class="list-group">
       @foreach (Auth::user()->courses()->get() as $course)
-        <a href="course/{{ $course->id }}" class="list-group-item list-group-item-info">
+        <a href="{{ url('course/' . $course->id) }}" class="list-group-item list-group-item-info">
           <h4 class="list-group-item-heading">
             {{ $course->subject }} {{ $course->course }}-{{ $course->section }}
           </h4>
