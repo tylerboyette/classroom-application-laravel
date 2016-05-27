@@ -38,5 +38,9 @@ Route::post('/profile/update', 'UserController@update');
  * Courses Routes
  */
 Route::get('/course/create', 'CourseController@create');
+Route::get('/course/{id}', 'CourseController@show');
+
 Route::post('/course', 'CourseController@store');
+Route::put('/course/{id}', 'CourseController@update');
+Route::delete('/course/{id}', 'CourseController@destroy');
 
