@@ -7,22 +7,10 @@
       <div class="form-group{{ $errors->has('title') ? ' has-error': ''}}">
         <label class="col-md-3 control-label">Title</label>
         <div class="col-md-5">
-          <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Quiz #1">
+          <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Chapter 1 Assignment">
 
           @if ($errors->has('title'))
             <span class="help-block"><strong>{{ $errors->first('title') }}</strong></span>
-          @endif
-        </div>
-      </div>
-
-      <!-- Description -->
-      <div class="form-group{{ $errors->has('description') ? ' has-error': ''}}">
-        <label class="col-md-3 control-label">Description</label>
-        <div class="col-md-5">
-          <input type="text" class="form-control" name="description" value="{{ old('description') }}" placeholder="Chapter 1 Assignment">
-
-          @if ($errors->has('description'))
-            <span class="help-block"><strong>{{ $errors->first('description') }}</strong></span>
           @endif
         </div>
       </div>
@@ -35,6 +23,18 @@
 
           @if ($errors->has('due_date'))
             <span class="help-block"><strong>{{ $errors->first('due_date') }}</strong></span>
+          @endif
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group{{ $errors->has('description') ? ' has-error': ''}}">
+        <label class="col-md-3 control-label">Description</label>
+        <div class="col-md-5">
+          <textarea class="form-control" name="description" value="{{ old('description') }}" placeholder="Type in the description here..." rows="4"></textarea>
+
+          @if ($errors->has('description'))
+            <span class="help-block"><strong>{{ $errors->first('description') }}</strong></span>
           @endif
         </div>
       </div>
@@ -69,7 +69,7 @@
       <div class="form-group{{ $errors->has('message') ? ' has-error': ''}}">
         <label class="col-md-3 control-label">Message</label>
         <div class="col-md-5">
-          <textarea = class="form-control" name="message" value="{{ old('message') }}" placeholder="Type in your message here..." rows="3"></textarea>
+          <textarea class="form-control" name="message" value="{{ old('message') }}" placeholder="Type in your message here..." rows="3"></textarea>
 
           @if ($errors->has('message'))
             <span class="help-block"><strong>{{ $errors->first('message') }}</strong></span>
