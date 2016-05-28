@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  @if (Auth::user()->id == $instructor->id)
+  @if (Auth::user()->role == 'teacher' && Auth::user()->id == $instructor->id)
     <div class="panel panel-warning">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
@@ -113,6 +113,31 @@
               </form>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Quizzes, Assignments, and Annoucements -->
+    <div class="panel panel-success">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Add Quizzes, Assignments, Annoucements</a>
+        </h4>
+      </div>
+
+      <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          <div class="btn-group col-md-offset-9">
+            <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select Type <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="annoucement">Annoucement</a></li>
+              <li><a href="#" id="assignment">Assignment</a></li>
+              <li><a href="#" id="quiz">Quiz</a></li>
+            </ul>
+          </div>
+          @include('form.assign-annouc')
         </div>
       </div>
     </div>
