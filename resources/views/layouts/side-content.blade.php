@@ -22,5 +22,5 @@
 
 <div class="well">
   <h4>Messages</h4>
-  <p>Currently you have no messages.</p>
+  <div class="alert alert-danger" role="alert=">Currently, you don't have any new messages.</div>
 </div>

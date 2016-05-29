@@ -42,7 +42,7 @@
       <!-- Submit Button -->
       <div class="form-group">
         <div class="col-md-4 col-md-offset-6">
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
 
@@ -80,7 +80,7 @@
       <!-- Submit Button -->
       <div class="form-group">
         <div class="col-md-4 col-md-offset-6">
-          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
 
