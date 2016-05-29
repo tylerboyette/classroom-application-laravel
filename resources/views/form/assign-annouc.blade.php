@@ -1,6 +1,6 @@
 <div id="forms">
   <div id="assignment-form" class="forms">
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/assignment') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/course/' . $course_id . '/assignment') }}">
       {{ csrf_field() }}
 
       <!-- Title -->
@@ -50,7 +50,7 @@
   </div>
 
   <div id="annoucement-form" class="forms">
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/annoucement') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/course/' . $course_id . '/annoucement') }}">
       {{ csrf_field() }}
 
       <!-- Title -->
