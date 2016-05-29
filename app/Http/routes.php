@@ -20,7 +20,7 @@ Route::get('/', function () {
     if (Auth::guest()) {
       return view('auth.login');
     } else {
-      return view('pages.home');
+      return redirect('/home');
     }
 });
 
@@ -35,7 +35,7 @@ Route::get('/profile', 'UserController@show');
 Route::post('/profile/update', 'UserController@update');
 
 /**
- * Courses Routes
+ * Course Routes
  */
 Route::get('/course/create', 'CourseController@create');
 Route::get('/course/{id}', 'CourseController@show');
@@ -43,4 +43,10 @@ Route::get('/course/{id}', 'CourseController@show');
 Route::post('/course', 'CourseController@store');
 Route::put('/course/{id}', 'CourseController@update');
 Route::delete('/course/{id}', 'CourseController@destroy');
+
+/**
+ * Assignemnt Routes
+ * 
+ */
+Route::post('/course/{id}/assignment', 'AssignmentController@store');
 
