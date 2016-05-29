@@ -33,9 +33,13 @@ class CourseController extends Controller
         $course = Course::find($id);
         $instructor = $course->users()->where('role', 'teacher')->first();
 
+        $assignments = $course->assignments()->orderBy('due_date', 'desc')->get();
+
         return view('pages.course.show', [
             'course' => $course,
-            'instructor' => $instructor
+            'instructor' => $instructor,
+            'course_id' => $id,
+            'assignments' => $assignments
         ]);
     }
 

@@ -24,3 +24,20 @@
   <h4>Messages</h4>
   <div class="alert alert-danger" role="alert=">Currently, you don't have any new messages.</div>
 </div>
+
+@if (isset($assignments))
+  @if (count($assignments) > 0)
+    <div class="well">
+      <h4>Assignments</h4>
+      <div class="list-group">
+        @foreach ($assignments as $assignment)
+          <a href="{{ url('/course/' . $course_id . '/assignment/' . $assignment->id) }}" class="list-group-item list-group-item-info">
+            <h4 class="list-group-item-heading">{{ $assignment->title }}</h4>
+            <p class="list-group-item-text">Due Date: <u>{{ date('F jS Y \a\t h:i A', strtotime($assignment->due_date)) }}</u></p>
+          </a>
+        @endforeach
+      </div>
+    </div>
+  @endif
+@endif
+
