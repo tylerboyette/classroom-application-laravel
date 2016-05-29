@@ -39,11 +39,20 @@ class Course extends Model
     }
 
     /**
-     * The users that belong to this class
+     * Users that belong to this class
      *   
      */
     public function users()
     {
         return $this->belongsToMany('App\Models\User');
+    }
+
+    /**
+     * Assignments that belong to this class
+     * 
+     */
+    public function assignments()
+    {
+        return $this->hasMany('App\Models\Assignment');
     }
 }
