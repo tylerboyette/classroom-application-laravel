@@ -11,13 +11,29 @@
 
   <div class="panel panel-info">
     <div class="panel-heading">
-      See What's Happening...
+      <h4 class="panel-title">
+        Recent Activity...
+      </h4>
     </div>
 
     <div class="panel-body">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer justo velit, lacinia eget feugiat vel, facilisis in sapien. In quis porttitor diam, id dictum libero. Morbi imperdiet nec felis vitae porttitor. Donec bibendum dui vitae neque lobortis, ut maximus ante ornare. Suspendisse pretium dui id nibh iaculis vehicula. Cras sapien elit, condimentum et finibus a, mattis at enim. Vivamus non eros vestibulum, eleifend nunc eget, malesuada enim. Donec arcu lectus, blandit non sagittis id, facilisis nec purus. Vestibulum finibus lobortis elit nec accumsan. Ut ac ullamcorper orci, et malesuada urna. Nullam turpis arcu, gravida id dui ut, aliquet viverra elit. Sed blandit, urna quis fringilla auctor, elit lectus tristique mauris, laoreet faucibus arcu ipsum fermentum tortor. Nulla bibendum, enim ac lacinia viverra, arcu nunc eleifend nisi, eu mattis diam felis et leo. Vestibulum cursus, urna et imperdiet mattis, nisi massa placerat sapien, malesuada tincidunt ex felis gravida nunc. Donec sollicitudin suscipit odio, quis aliquam neque imperdiet vel.</p>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer justo velit, lacinia eget feugiat vel, facilisis in sapien. In quis porttitor diam, id dictum libero. Morbi imperdiet nec felis vitae porttitor. Donec bibendum dui vitae neque lobortis, ut maximus ante ornare. Suspendisse pretium dui id nibh iaculis vehicula. Cras sapien elit, condimentum et finibus a, mattis at enim. Vivamus non eros vestibulum, eleifend nunc eget, malesuada enim. Donec arcu lectus, blandit non sagittis id, facilisis nec purus. Vestibulum finibus lobortis elit nec accumsan. Ut ac ullamcorper orci, et malesuada urna. Nullam turpis arcu, gravida id dui ut, aliquet viverra elit. Sed blandit, urna quis fringilla auctor, elit lectus tristique mauris, laoreet faucibus arcu ipsum fermentum tortor. Nulla bibendum, enim ac lacinia viverra, arcu nunc eleifend nisi, eu mattis diam felis et leo. Vestibulum cursus, urna et imperdiet mattis, nisi massa placerat sapien, malesuada tincidunt ex felis gravida nunc. Donec sollicitudin suscipit odio, quis aliquam neque imperdiet vel.</p>
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
+        @if (isset($recent_assignments))
+          <div class="list-group">
+            @foreach ($recent_assignments as $assignment)
+              <a href="{{ url('/course/' . $assignment->course_id . '/assignment/' . $assignment->id) }}" class="list-group-item list-group-item-warning">
+                <h4 class="list-group-item-heading">{{ $assignment->title }}</h4>
+                <p class="list-group-item-text">{{ $assignment->course_title }}</p>
+                <p class="list-group-item-text">Due Date: <u>{{ date('F jS Y \a\t h:i A', strtotime($assignment->due_date)) }}</u></p>
+              </a>
+            @endforeach
+          </div>
+        @else 
+          <div class="alert alert-danger">
+            <strong>Oops!</strong> There is nothing going on at the moment. Please check back later.</div>
+          </div>
+        @endif
+      </div>
     </div>
   </div>
 @endsection
