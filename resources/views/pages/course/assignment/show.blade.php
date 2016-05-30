@@ -23,7 +23,7 @@
           <p>{{ $assignment->description }}</p>
         </div>
         @if (Auth::user()->id == $course_instructor)
-          <form role="form" method="post" action="{{ url('/course/' . $course_id . '/assignment/ ' . $assignment->id) }}">
+          <form role="form" method="post" action="{{ url('/course/' . $course_id . '/assignment/' . $assignment->id) }}">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
 

@@ -50,4 +50,5 @@ Route::delete('/course/{id}', 'CourseController@destroy');
  */
 Route::post('/course/{id}/assignment', 'AssignmentController@store');
 Route::get('/course/{course_id}/assignment/{assignment_id}', 'AssignmentController@show');
+Route::delete('/course/{course_id}/assignment/{assignment_id}', 'AssignmentController@destroy');
 

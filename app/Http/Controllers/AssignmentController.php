@@ -37,6 +37,13 @@ class AssignmentController extends Controller
       }
     }
 
+    /**
+     * Show details about a particular assignment
+     * 
+     * @param  integer $course_id     
+     * @param  integer $assignment_id 
+     * @return Response                
+     */
     public function show($course_id, $assignment_id)
     {
       $assignment = Assignment::find($assignment_id);
@@ -50,5 +57,12 @@ class AssignmentController extends Controller
         'assignment' => $assignment,
         'course_instructor' => $course_instructor
       ]);
+    }
+
+    public function destroy(Assignment $assignment, $course_id, $assignment_id)
+    {
+      if (Assignment::destroy($assignment_id)) {
+        return redirect('/course/' . $course_id)->with('status', 'Assignment deleted successfully!');
+      }
     }    
 }
