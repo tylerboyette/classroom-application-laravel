@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Assignment;
+use App\Models\Course;
 
 class AssignmentController extends Controller
 {
@@ -35,4 +36,19 @@ class AssignmentController extends Controller
         return redirect('/course/' . $id)->with('status', 'Assignment added successfully!');
       }
     }
+
+    public function show($course_id, $assignment_id)
+    {
+      $assignment = Assignment::find($assignment_id);
+      $course = Course::find($course_id);
+      $course_name = $course->subject . ' ' . $course->course . '-' . $course->section;
+      $course_instructor = $course->user_id;
+
+      return view('pages.course.assignment.show', [
+        'course_name' => $course_name,
+        'course_id' => $course_id,
+        'assignment' => $assignment,
+        'course_instructor' => $course_instructor
+      ]);
+    }    
 }
