@@ -42,7 +42,7 @@ class AssignmentController extends Controller
      * 
      * @param  integer $course_id     
      * @param  integer $assignment_id 
-     * @return Response                
+     * @return Response response             
      */
     public function show($course_id, $assignment_id)
     {
@@ -55,14 +55,44 @@ class AssignmentController extends Controller
         'course_name' => $course_name,
         'course_id' => $course_id,
         'assignment' => $assignment,
-        'course_instructor' => $course_instructor
+        'course_instructor' => $course_instructor,
+        'due_date_formatted' => str_replace(' ', 'T', $assignment->due_date)
       ]);
     }
 
-    public function destroy(Assignment $assignment, $course_id, $assignment_id)
+    /**
+     * Delete a particular assignment
+     * 
+     * @param  integer     $course_id    
+     * @param  integer    $assignment_id 
+     * @return Response response
+     */
+    public function destroy($course_id, $assignment_id)
     {
       if (Assignment::destroy($assignment_id)) {
         return redirect('/course/' . $course_id)->with('status', 'Assignment deleted successfully!');
+      }
+    }
+
+    public function update(Request $request, $course_id, $assignment_id)
+    {
+      $this->validate($request, [
+        'title' => 'required',
+        'due_date' => 'required|date',
+        'description' => 'required'
+      ]);
+
+      $due_date = $request->input('due_date');
+      $due_date = str_replace('T', ' ', $due_date);
+      $due_date = $due_date . ':00';
+      
+      $assignment = Assignment::find($assignment_id);
+      $assignment->title = $request->input('title');
+      $assignment->due_date = $due_date;
+      $assignment->description = $request->input('description');
+
+      if ($assignment->save()) {
+        return redirect('/course/' . $course_id . '/assignment/' . $assignment_id)->with('status', 'Assignment updated successfully!');
       }
     }    
 }
