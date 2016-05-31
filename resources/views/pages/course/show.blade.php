@@ -9,7 +9,7 @@
   <!-- Display flashed session data on successful action -->
   @include('common.session-data')
 
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
         Basic Course Information
@@ -17,31 +17,50 @@
     </div>
 
     <div class="panel-body">
-      <div class="col-xs-12 col-md-10">
+      <div class="col-xs-12 col-md-10 col-md-offset-1">
         <div class="well">
             <h3>{{ $course->subject }} {{ $course->course }}-{{ $course->section }}</h3>
             <p><strong>Instructor:</strong> {{ $instructor->first_name }} {{ $instructor->last_name }}</p>
             <p><strong>Title:</strong> {{ $course->title }}</p>
         </div>
+        @if (Auth::user()->id == $instructor->id)
+          <form role="form" method="POST" action="{{ url('/course/' . $course->id) }}">
+          {{ csrf_field() }}
+          {{ method_field('DELETE') }}
+
+          <!-- Delete Button -->
+          <button type="submit" class="btn btn-danger pull-right">Delete</button>
+        </form>
+        @endif
       </div>
-      @if (Auth::user()->id == $instructor->id)
-         <div class="col-xs-12 col-md-2">
-              <form role="form" method="POST" action="{{ url('/course/' . $course->id) }}">
-              {{ csrf_field() }}
-              {{ method_field('DELETE') }}
-    
-              <!-- Delete Button -->
-              <div class="form-group">
-                <button type="submit" class="btn btn-danger btn-lg btn-block">Delete</button>
-              </div>
-            </form>
-         </div>
-      @endif
     </div>
   </div>
 
   @if (Auth::user()->role == 'teacher' && Auth::user()->id == $instructor->id)
-    <div class="panel panel-warning">
+
+    <!-- Add Quizzes, Assignments, and Annoucements -->
+    <div class="panel panel-primary">
+      <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+          Add Assignments & Annoucements
+        </h4>
+      </div>
+
+      <div class="panel-body">
+        <div class="btn-group col-md-offset-9">
+          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Type <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" id="assignment">Assignment</a></li>
+            <li><a href="#" id="annoucement">Annoucement</a></li>
+          </ul>
+        </div>
+        @include('form.assign-annouc')
+      </div>
+    </div>
+
+    <div class="panel panel-primary">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
           <a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Edit Course Information</a>
@@ -111,30 +130,6 @@
 
             </form>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Add Quizzes, Assignments, and Annoucements -->
-    <div class="panel panel-success">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Add Assignments & Annoucements</a>
-        </h4>
-      </div>
-
-      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-        <div class="panel-body">
-          <div class="btn-group col-md-offset-9">
-            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Select Type <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="assignment">Assignment</a></li>
-              <li><a href="#" id="annoucement">Annoucement</a></li>
-            </ul>
-          </div>
-          @include('form.assign-annouc')
         </div>
       </div>
     </div>
