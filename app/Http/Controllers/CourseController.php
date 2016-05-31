@@ -34,12 +34,38 @@ class CourseController extends Controller
         $instructor = $course->users()->where('role', 'teacher')->first();
 
         $assignments = $course->assignments()->orderBy('due_date', 'desc')->get();
+        $annoucements = $course->annoucements()->orderBy('created_at', 'desc')->get();
+
+        // Grab all the recent activity, which includes 
+        // assignments and annoucement, then sort date that 
+        // it was created
+        $recent_activity = array();
+
+        if (count($assignments) > 0 || count($assignments) > 0) {
+            foreach ($annoucements as $annoucement) {
+                $annoucement->type = 'annoucement';
+                array_push($recent_activity, $annoucement);
+            }
+
+            foreach ($assignments as $assignment) {
+                $assignment->type = 'assignment';
+                array_push($recent_activity, $assignment);
+            }
+
+            usort($recent_activity, function($a, $b) {
+                if ($a->created_at == $b->created_at) {
+                    return 0;
+                }
+                return ($a->created_at > $b->created_at) ? -1 : 1;
+            });
+        }
 
         return view('pages.course.show', [
             'course' => $course,
             'instructor' => $instructor,
             'course_id' => $id,
-            'assignments' => $assignments
+            'assignments' => $assignments,
+            'recent_activity' => $recent_activity
         ]);
     }
 

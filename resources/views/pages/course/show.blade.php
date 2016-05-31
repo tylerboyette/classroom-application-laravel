@@ -36,6 +36,37 @@
     </div>
   </div>
 
+  @if (isset($recent_activity))
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Recent Activity
+        </h4>
+      </div>
+
+      <div class="panel-body">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+          <div class="list-group">
+            @foreach ($recent_activity as $activity) 
+              @if ($activity->type == 'annoucement')
+                <a href="{{ url('/course/' . $activity->course_id . '/annoucement/' . $activity->id) }}" class="list-group-item list-group-item-info">
+                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
+                  <p class="list-group-item-text">{{ $activity->message }}</p>
+                </a>
+              @else
+                <a href="{{ url('/course/' . $activity->course_id . '/assignment/' . $activity->id) }}" class="list-group-item list-group-item-warning">
+                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
+                  <p class="list-group-item-text">{{ $activity->description }}</p>
+                  <p class="list-group-item-text"><b>Due Date:</b> <u>{{ date('F jS Y \a\t h:i A', strtotime($activity->due_date)) }}</u></p>
+                </a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
+
   @if (Auth::user()->role == 'teacher' && Auth::user()->id == $instructor->id)
 
     <!-- Add Quizzes, Assignments, and Annoucements -->
