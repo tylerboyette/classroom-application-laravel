@@ -63,6 +63,6 @@ class Course extends Model
      */
     public function annoucements()
     {
-        return $this->hasMany('App\Models\Annoucements');
+        return $this->hasMany('App\Models\Annoucement');
     }
 }
