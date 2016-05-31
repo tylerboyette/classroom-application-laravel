@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Models\Annoucement;
+use App\Models\Course;
 
 class AnnoucementController extends Controller
 {
@@ -32,5 +33,23 @@ class AnnoucementController extends Controller
       if ($annoucement->save()) {
         return redirect('/course/' . $course_id)->with('status', 'Annoucement added successfully!');
       }
+    }
+
+    /**
+     * Show details about the specific annoucement
+     * 
+     * @param  Integer $course_id      
+     * @param  Integer $annoucement_id 
+     * @return Response                 
+     */
+    public function show($course_id, $annoucement_id) 
+    {
+      $course = Course::find($course_id);
+      $annoucement = Annoucement::find($annoucement_id);
+
+      return view('pages.course.annoucement.show', [
+        'course' => $course,
+        'annoucement' => $annoucement
+      ]);
     }
 }

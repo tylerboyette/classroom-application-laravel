@@ -55,4 +55,6 @@ Route::put('/course/{course_id}/assignment/{assignment_id}', 'AssignmentControll
 
 // Annoucement Routes
 Route::post('/course/{course_id}/annoucement', 'AnnoucementController@store');
+Route::get('/course/{course_id}/annoucement/{annoucement_id}', 'AnnoucementController@show');
+Route::delete('/course/{course_id}/annoucement/{annoucement_id}', 'AnnoucementController@destroy');
 
