@@ -55,4 +55,14 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\Assignment');
     }
+
+    /**
+     * Annoucements that belong to this class
+     * 
+     * @return Response
+     */
+    public function annoucements()
+    {
+        return $this->hasMany('App\Models\Annoucements');
+    }
 }
