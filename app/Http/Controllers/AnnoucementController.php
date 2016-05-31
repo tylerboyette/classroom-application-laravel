@@ -52,4 +52,18 @@ class AnnoucementController extends Controller
         'annoucement' => $annoucement
       ]);
     }
+
+    /**
+     * Deletes a particular annoucement
+     * 
+     * @param  Integer $course_id      
+     * @param  Integer $annoucement_id 
+     * @return Response                 
+     */
+    public function destroy($course_id, $annoucement_id)
+    {
+      if (Annoucement::destroy($annoucement_id)) {
+        return redirect('/course/' . $course_id)->with('status', 'Annoucement deleted successfully!');
+      }
+    }
 }
