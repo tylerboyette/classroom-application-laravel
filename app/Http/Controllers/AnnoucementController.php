@@ -66,4 +66,20 @@ class AnnoucementController extends Controller
         return redirect('/course/' . $course_id)->with('status', 'Annoucement deleted successfully!');
       }
     }
+
+    public function update(Request $request, $course_id, $annoucement_id) 
+    {
+      $this->validate($request, [
+        'title' => 'required',
+        'message' => 'required'
+      ]);
+
+      $annoucement = Annoucement::find($annoucement_id);
+      $annoucement->title = $request->input('title');
+      $annoucement->message = $request->input('message');
+
+      if ($annoucement->save()) {
+        return redirect('/course/' . $course_id . '/annoucement/' . $annoucement_id)->with('status', 'Annoucement updated successfully!');
+      }
+    }
 }
