@@ -54,5 +54,5 @@ Route::delete('/course/{course_id}/assignment/{assignment_id}', 'AssignmentContr
 Route::put('/course/{course_id}/assignment/{assignment_id}', 'AssignmentController@update');
 
 // Annoucement Routes
-Route::post('/course/{id}/annoucement', 'AnnoucementController@store');
+Route::post('/course/{course_id}/annoucement', 'AnnoucementController@store');
 
