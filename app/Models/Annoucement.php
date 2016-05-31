@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,7 +37,7 @@ class Annoucement extends Model
      */
     public function setMessageAttribute($value)
     {
-      $this->attributes['title'] = ucfirst($value);
+      $this->attributes['message'] = ucfirst($value);
     }
 
     /**

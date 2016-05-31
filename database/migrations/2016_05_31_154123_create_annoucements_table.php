@@ -16,7 +16,7 @@ class CreateAnnoucementsTable extends Migration
             $table->increments('id');
 
             $table->string('title');
-            $table->text('description');
+            $table->text('message');
 
             $table->integer('course_id')->unsigned();
 
@@ -24,7 +24,7 @@ class CreateAnnoucementsTable extends Migration
         });
 
         // Foreign Key Constraint
-        Schema::table('assignments', function (Blueprint $table) {
+        Schema::table('annoucements', function (Blueprint $table) {
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
