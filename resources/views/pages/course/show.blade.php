@@ -9,89 +9,37 @@
   <!-- Display flashed session data on successful action -->
   @include('common.session-data')
 
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        Basic Course Information
-      </h4>
-    </div>
-
-    <div class="panel-body">
-      <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <div class="well">
-            <h3>{{ $course->subject }} {{ $course->course }}-{{ $course->section }}</h3>
-            <p><strong>Instructor:</strong> {{ $instructor->first_name }} {{ $instructor->last_name }}</p>
-            <p><strong>Title:</strong> {{ $course->title }}</p>
-        </div>
-        @if (Auth::user()->id == $instructor->id)
-          <form role="form" method="POST" action="{{ url('/course/' . $course->id) }}">
-          {{ csrf_field() }}
-          {{ method_field('DELETE') }}
-
-          <!-- Delete Button -->
-          <button type="submit" class="btn btn-danger pull-right">Delete</button>
-        </form>
-        @endif
-      </div>
-    </div>
-  </div>
-
-  @if (isset($recent_activity))
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          Recent Activity
-        </h4>
-      </div>
-
-      <div class="panel-body">
-        <div class="col-xs-12 col-md-10 col-md-offset-1">
-          <div class="list-group">
-            @foreach ($recent_activity as $activity) 
-              @if ($activity->type == 'annoucement')
-                <a href="{{ url('/course/' . $activity->course_id . '/annoucement/' . $activity->id) }}" class="list-group-item list-group-item-info">
-                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
-                  <p class="list-group-item-text">{{ $activity->message }}</p>
-                </a>
-              @else
-                <a href="{{ url('/course/' . $activity->course_id . '/assignment/' . $activity->id) }}" class="list-group-item list-group-item-warning">
-                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
-                  <p class="list-group-item-text">{{ $activity->description }}</p>
-                  <p class="list-group-item-text"><b>Due Date:</b> <u>{{ date('F jS Y \a\t h:i A', strtotime($activity->due_date)) }}</u></p>
-                </a>
-              @endif
-            @endforeach
+  <!-- Show course title and instructor's name -->
+  <div class="row">
+    @if (Auth::user()->id == $instructor->id)
+      <div class="col-md-10">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - {{ $instructor->first_name }} {{ $instructor->last_name }}
+            </h4>
           </div>
         </div>
       </div>
-    </div>
-  @endif
-
-  @if (Auth::user()->role == 'teacher' && Auth::user()->id == $instructor->id)
-
-    <!-- Add Quizzes, Assignments, and Annoucements -->
-    <div class="panel panel-primary">
-      <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-          Add Assignments & Annoucements
-        </h4>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger btn-block" style="margin-top: 2px">Delete</button>
       </div>
-
-      <div class="panel-body">
-        <div class="btn-group col-md-offset-9">
-          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select Type <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a href="#" id="assignment">Assignment</a></li>
-            <li><a href="#" id="annoucement">Annoucement</a></li>
-          </ul>
+    @else
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - {{ $instructor->first_name }} {{ $instructor->last_name }}
+            </h4>
+          </div>
         </div>
-        @include('form.assign-annouc')
       </div>
-    </div>
+    @endif
+  </div>
 
-    <div class="panel panel-primary">
+  @if (Auth::user()->id == $instructor->id)
+    <!-- Edit Course Information -->
+    <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
           <a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Edit Course Information</a>
@@ -155,13 +103,69 @@
               <!-- Edit Button -->
               <div class="form-group">
                 <div class="col-md-4 col-md-offset-7">
-                  <button type="submit" class="btn btn-success">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </div>
 
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  @endif
+
+
+  @if (isset($recent_activity) && count($recent_activity) > 0)
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Recent Activity
+        </h4>
+      </div>
+
+      <div class="panel-body">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+          <div class="list-group">
+            @foreach ($recent_activity as $activity) 
+              @if ($activity->type == 'annoucement')
+                <a href="{{ url('/course/' . $activity->course_id . '/annoucement/' . $activity->id) }}" class="list-group-item list-group-item-info">
+                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
+                  <p class="list-group-item-text">{{ $activity->message }}</p>
+                </a>
+              @else
+                <a href="{{ url('/course/' . $activity->course_id . '/assignment/' . $activity->id) }}" class="list-group-item list-group-item-warning">
+                  <h4 class="list-group-item-heading">{{ $activity->title }}</h4>
+                  <p class="list-group-item-text">{{ $activity->description }}</p>
+                  <p class="list-group-item-text"><b>Due Date:</b> <u>{{ date('F jS Y \a\t h:i A', strtotime($activity->due_date)) }}</u></p>
+                </a>
+              @endif
+            @endforeach
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
+
+  @if (Auth::user()->role == 'teacher' && Auth::user()->id == $instructor->id)
+    <!-- Add Quizzes, Assignments, and Annoucements -->
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab">
+        <h4 class="panel-title">
+          Add Assignments & Annoucements
+        </h4>
+      </div>
+
+      <div class="panel-body">
+        <div class="btn-group col-md-offset-9">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Type <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#" id="assignment">Assignment</a></li>
+            <li><a href="#" id="annoucement">Annoucement</a></li>
+          </ul>
+        </div>
+        @include('form.assign-annouc')
       </div>
     </div>
   @endif
