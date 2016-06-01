@@ -30,6 +30,12 @@ class MessageController extends Controller
       ]);
     }
 
+    /**
+     * Deletes a particular message
+     * 
+     * @param  Integer $message_id
+     * @return Response             
+     */
     public function destroy($message_id)
     {
       $message = Message::find($message_id);
