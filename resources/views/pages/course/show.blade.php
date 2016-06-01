@@ -16,7 +16,7 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h4 class="panel-title">
-              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - {{ $instructor->first_name }} {{ $instructor->last_name }}
+              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - <a href="{{ url('/profile/' . $instructor->id) }}">{{ $instructor->first_name }} {{ $instructor->last_name }}</a>
             </h4>
           </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h4 class="panel-title">
-              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - {{ $instructor->first_name }} {{ $instructor->last_name }}
+              {{ $course->subject }} {{ $course->course }}-{{ $course->section }} - {{ $course->title }} - <a href="{{ url('/profile/' . $instructor->id) }}">{{ $instructor->first_name }} {{ $instructor->last_name }}</a>
             </h4>
           </div>
         </div>
