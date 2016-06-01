@@ -22,7 +22,12 @@
         </div>
       </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-danger btn-block" style="margin-top: 2px">Delete</button>
+        <form role="form" method="POST" action="{{ url('/course/' . $course->id) }}">
+          {{ csrf_field() }}
+          {{ method_field('DELETE') }}
+
+          <button type="button" class="btn btn-danger btn-block" style="margin-top: 2px">Delete</button>
+        </form>
       </div>
     @else
       <div class="col-md-12">
