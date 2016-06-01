@@ -31,7 +31,7 @@
             <hr>
 
             <!-- Private Message -->
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/profile/' . $user->id . '/message') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/' . $user->id . '/message') }}">
               {{ csrf_field() }}
 
               <!-- Title -->
@@ -52,9 +52,7 @@
                   <label class="col-md-3 control-label">Message</label>
 
                   <div class="col-md-6">
-                    <textarea class="form-control" name="message" rows="3">
-                      {{ $errors->has('message') ? old('message') : '' }}
-                    </textarea>
+                    <textarea class="form-control" name="message" rows="3">{{ $errors->has('message') ? old('message') : '' }}</textarea>
 
                     @if ($errors->has('message'))
                       <span class="help-block"><strong>{{ $errors->first('message') }}</strong></span>
