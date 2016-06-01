@@ -26,7 +26,7 @@
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
 
-          <button type="button" class="btn btn-danger btn-block" style="margin-top: 2px">Delete</button>
+          <button type="submit" class="btn btn-danger btn-block" style="margin-top: 2px">Delete</button>
         </form>
       </div>
     @else
