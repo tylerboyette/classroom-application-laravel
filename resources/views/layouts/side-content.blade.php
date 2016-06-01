@@ -22,7 +22,20 @@
 
 <div class="well">
   <h4>Messages</h4>
-  <div class="alert alert-danger" role="alert=">Currently, you don't have any new messages.</div>
+  @if (count(Auth::user()->messages()->where('to', '=', Auth::user()->id)->get()) > 0)
+    <div class="list-group">
+      @foreach (Auth::user()->messages()->where('to', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get() as $message)
+        <a href="{{ url('/message/' . $message->id) }}" class="list-group-item list-group-item-info">
+          <h4 class="list-group-item-heading">
+            {{ $message->title }}
+          </h4>
+          <p class="list-group-item-text">{{ $message->message }}</p>
+        </a>
+      @endforeach
+    </div>
+  @else
+    <div class="alert alert-danger" role="alert=">Currently, you don't have any new messages.</div>
+  @endif
 </div>
 
 @if (isset($assignments))
