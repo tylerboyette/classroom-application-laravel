@@ -5,6 +5,9 @@
 @section('page-header', 'Message Details')
 
 @section('content')
+
+  @include('common.session-data')
+
   <div class="col-xs-12 col-md-12">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -25,7 +28,7 @@
               {{ csrf_field() }}
               {{ method_field('DELETE') }}
 
-              <button type="button" class="btn btn-danger btn-block">Delete</div>
+              <button type="submit" class="btn btn-danger btn-block">Delete</div>
             </form>
         </div>
 
