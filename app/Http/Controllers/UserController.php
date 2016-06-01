@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+
 class UserController extends Controller
 {
     /**
@@ -24,10 +26,17 @@ class UserController extends Controller
      * 
      * @return Response
      */
-    public function show() 
-    {
-        //return Auth::user()->courses()->get();
-        return view('pages.user.profile');
+    public function show($user_id = NULL) 
+    {  
+        $user = NULL;
+
+        if ($user_id) {
+            $user = User::find($user_id);
+        } else {
+            $user = Auth::user();
+        }
+
+        return view('pages.user.profile')->with('user', $user);
     }
 
     /**
