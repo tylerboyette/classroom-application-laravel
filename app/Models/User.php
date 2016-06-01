@@ -59,8 +59,23 @@ class User extends Authenticatable
         $this->attributes['email'] = strtolower($value);
     }
 
+    /**
+     * Many-to-many relationship between users and courses
+     * 
+     * @return Response 
+     */
     public function courses()
     {
         return $this->belongsToMany('App\Models\Course');
+    }
+
+    /**
+     * Many-to-many relationship between users and messages
+     * 
+     * @return Response
+     */
+    public function messages()
+    {
+        return $this->belongsToMany('App\Models\Message');
     }
 }

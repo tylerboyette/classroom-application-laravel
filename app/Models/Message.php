@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,5 +37,15 @@ class Message extends Model
     public function setMessageAttribute($value)
     {
       $this->attributes['message'] = ucfirst($value);
+    }
+
+    /**
+     * Many-to-many relationship between users and messages
+     *  
+     * @return Response
+     */
+    public function users()
+    {
+      return $this->belongsToMany('App\Models\User');
     }
 }
