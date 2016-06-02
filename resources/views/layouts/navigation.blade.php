@@ -20,8 +20,6 @@
           <!-- Display appropriate links based on the user's role -->
           @if (Auth::user()->role == 'teacher')
             <li><a href="{{ url('/course/create') }}">Add Course</a></li>
-          @else 
-            <li><a href="{{ url('/course/view') }}">Courses</a></li>
           @endif
           
           <li><a href="{{ url('/profile') }}">Profile</a></li>
