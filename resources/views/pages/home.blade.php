@@ -9,7 +9,7 @@
   <!-- Display flashed session data on successful action -->
   @include('common.session-data')
 
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h4 class="panel-title">
         Recent Activity...
@@ -18,7 +18,7 @@
 
     <div class="panel-body">
       <div class="col-xs-12 col-md-10 col-md-offset-1">
-        @if (isset($recent_assignments))
+        @if (!isset($recent_assignments) && count($recent_assignments) > 0)
           <div class="list-group">
             @foreach ($recent_assignments as $assignment)
               <a href="{{ url('/course/' . $assignment->course_id . '/assignment/' . $assignment->id) }}" class="list-group-item list-group-item-warning">
@@ -30,7 +30,7 @@
           </div>
         @else 
           <div class="alert alert-danger">
-            <strong>Oops!</strong> There is nothing going on at the moment. Please check back later.</div>
+            There is nothing going on at the moment. Please check back later.</div>
           </div>
         @endif
       </div>

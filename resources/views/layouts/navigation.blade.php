@@ -25,7 +25,7 @@
           @endif
           
           <li><a href="{{ url('/profile') }}">Profile</a></li>
-          <li><a href="{{ url('/messages') }}">Messages</a></li>
+          <li><a href="{{ url('/message') }}">Messages</a></li>
         @endif
       </ul>
 
