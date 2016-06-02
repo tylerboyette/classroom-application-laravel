@@ -146,4 +146,13 @@ class CourseController extends Controller
             return redirect('/home')->with('status', 'Course deleted successfully!');
         }
     }
+
+    public function addStudents(Request $request, $course_id)
+    {
+        foreach ($request->except(['_token']) as $student_id) {
+            Course::find($course_id)->users()->attach($student_id);
+        }
+
+        return redirect('/course/' . $course_id)->with('status', 'Students added to the class successfully!');
+    }
 }

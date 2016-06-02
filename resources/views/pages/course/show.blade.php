@@ -47,7 +47,7 @@
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
-          <a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Edit Course Information</a>
+          <a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Edit Course Information or Add Students</a>
         </h4>
       </div>
 
@@ -113,6 +113,12 @@
               </div>
 
             </form>
+
+            <hr>
+            <div class="col-xs-12 col-md-6 col-md-offset-3">
+              <a href="{{ url('/course/' . $course->id . '/students') }}"><button type="button" class="btn btn-success btn-block">Add Students</button></a>
+            </div>
+            
           </div>
         </div>
       </div>

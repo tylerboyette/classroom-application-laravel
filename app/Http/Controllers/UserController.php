@@ -59,4 +59,17 @@ class UserController extends Controller
             return redirect('/profile')->with('status', 'Profile updated successfully!');
         }
     }
+
+    /**
+     * Display all users that are students
+     * 
+     * @return Response 
+     */
+    public function showAll($course_id) 
+    {
+        return view('pages.user.students/show_all', [
+            'users' => User::all(),
+            'course' => $course_id
+        ]);
+    }
 }

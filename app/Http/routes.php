@@ -33,6 +33,8 @@ Route::get('/profile', 'UserController@show');
 Route::post('/profile/update', 'UserController@update');
 Route::get('/profile/{user_id}', 'UserController@show');
 
+Route::get('/course/{course_id}/students', 'UserController@showAll');
+
 // Course Routes
 Route::get('/course/create', 'CourseController@create');
 Route::get('/course/{id}', 'CourseController@show');
@@ -40,6 +42,8 @@ Route::get('/course/{id}', 'CourseController@show');
 Route::post('/course', 'CourseController@store');
 Route::put('/course/{id}', 'CourseController@update');
 Route::delete('/course/{id}', 'CourseController@destroy');
+
+Route::post('/course/{course_id}/student', 'CourseController@addStudents');
 
 // Assignment Routes
 Route::post('/course/{id}/assignment', 'AssignmentController@store');
