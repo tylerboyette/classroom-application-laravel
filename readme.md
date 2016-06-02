@@ -11,6 +11,7 @@ This is strictly for learning purposes as this is my first project using the Lar
 * Reset forgotten password
 * See current activity in all of user's classes
 * Send and receive private messages to other users
+* Add users to a course
 
 ## Instructor's Functionality
 * Create and edit courses
