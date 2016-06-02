@@ -22,7 +22,7 @@
           <div class="list-group">
             @foreach ($recent_activity as $activity)
               @if ($activity->type == 'assignment')
-                <a href="#" class="list-group-item list-group-item-success">
+                <a href="{{ url('/course/' . $activity->course_id . '/assignment/' . $activity->id) }}" class="list-group-item list-group-item-success">
                   <h4 class="list-group-item-heading">{{ $activity->course_info }} - {{ $activity->title }}</h4>
                   <p class="list-group-item-text">
                     <p>{{ date('F jS Y \a\t h:i A', strtotime($activity->created_at)) }}</p>
@@ -30,7 +30,7 @@
                   </p>
                 </a>
               @else
-                <a href="#" class="list-group-item list-group-item-info">
+                <a href="{{ url('/course/' . $activity->course_id . '/annoucement/' . $activity->id) }}" class="list-group-item list-group-item-info">
                   <h4 class="list-group-item-heading">{{ $activity->course_info }} - {{ $activity->title }}</h4>
                   <p class="list-group-item-text">
                     <p>{{ date('F jS Y \a\t h:i A', strtotime($activity->created_at)) }}</p>
