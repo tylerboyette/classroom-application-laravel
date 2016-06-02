@@ -57,4 +57,5 @@ Route::put('/course/{course_id}/annoucement/{annoucement_id}', 'AnnoucementContr
 Route::post('/user/{user_id}/message', 'MessageController@store');
 Route::get('/message/{message_id}', 'MessageController@show');
 Route::delete('/message/{message_id}', 'MessageController@destroy');
+Route::get('/message/', 'MessageController@showAll');
 

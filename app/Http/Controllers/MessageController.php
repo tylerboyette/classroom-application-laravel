@@ -78,17 +78,23 @@ class MessageController extends Controller
       }
     }
 
+    /**
+     * Show all messages that the user has
+     * 
+     * @return Response 
+     */
     public function showAll()
     {
       $user = User::find(Auth::user()->id);
       $messages = $user->messages()->where('to', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
       
+      // Grab the sender's first and last name
       foreach ($messages as $message) {
         $from = User::find($message->from);
         $fullname = $from->first_name . ' ' . $from->last_name;
         $message->from_fullname = $fullname;
       }
-      
+
       return view('pages.user.message.show_all', [
         'messages' => $messages
       ]);
