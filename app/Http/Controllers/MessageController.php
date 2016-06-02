@@ -77,4 +77,20 @@ class MessageController extends Controller
         return redirect('/profile/' . $user_id)->with('status', 'Message sent successfully!');
       }
     }
+
+    public function showAll()
+    {
+      $user = User::find(Auth::user()->id);
+      $messages = $user->messages()->where('to', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+      
+      foreach ($messages as $message) {
+        $from = User::find($message->from);
+        $fullname = $from->first_name . ' ' . $from->last_name;
+        $message->from_fullname = $fullname;
+      }
+      
+      return view('pages.user.message.show_all', [
+        'messages' => $messages
+      ]);
+    }
 }
