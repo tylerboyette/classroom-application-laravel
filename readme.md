@@ -1,12 +1,9 @@
 # Classroom Application
 
 ### Description
-<p>
 Created a small project using the Laravel PHP Framework that basically works like an "online classroom" in a sense that it allows to have both students and teachers registered for the website. Users can create classes, assignments, annoucements (assuming you're role is an instructor) and send messages to other users.
-</p>
-<p>
+
 This is strictly for learning purposes as this is my first project using the `Laravel` framework. 
-</p>
 
 ### User Functionality
 * Register
